@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register with Email</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa; /* Light blue background */
+            margin: 0;
+            padding: 0;
+        }
+        .register-container {
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.8); /* White background with opacity */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            text-align: center;
+            border: 2px solid #00acc1; /* Sea blue border for container */
+        }
+        .register-container h2 {
+            margin-bottom: 1rem;
+            color: #3a00c1; /* Sea blue heading */
+        }
+        .register-container label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .register-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .register-button {
+            background-color: #007bb8; /* Sea blue button */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            width: 100%;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .register-button:hover {
+            background-color: #02008c; /* Darker sea blue on hover */
+        }
+    </style>
+</head>
+<body>
+
+<div class="register-container">
+    <h2>Register with Email</h2>
+    <label for="email">Email</label>
+    <input type="email" id="email" placeholder="Enter your email" required>
+
+    <label for="password">Password</label>
+    <input type="password" id="password" placeholder="Enter your password" required minlength="6">
+
+    <button class="register-button" onclick="register()">Register</button>
+</div>
+
+<script>
+    function register() {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        if (email && password.length >= 6) {
+            alert("Registration successful!");
+            // Here, you would normally send the data to the server
+        } else {
+            alert("Please provide valid details.");
+        }
+    }
+</script>
+
+</body>
+</html>

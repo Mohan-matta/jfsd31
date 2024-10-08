@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Professionals - Professional Hiring Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa; /* Light blue background */
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #007bb8; /* Sea blue header */
+            color: white;
+            padding: 0.5rem;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+        main {
+            padding: 2rem;
+            text-align: center;
+        }
+        .search-container {
+            margin-bottom: 1rem;
+            position: relative; /* For positioning suggestions */
+            display: inline-block; /* Center the container */
+        }
+        .search-container input {
+            padding: 15px; /* Increased padding for a larger search bar */
+            width: 400px; /* Increased width for a larger search bar */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px; /* Increased font size */
+        }
+        .suggestions {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            max-width: 400px; /* Match with the search bar width */
+            margin: 0 auto; /* Center the suggestions */
+            display: none; /* Hidden by default */
+            position: absolute;
+            background-color: white;
+            z-index: 1;
+            width: 100%; /* Full width of the input */
+            left: 0; /* Align suggestions directly below the search bar */
+        }
+        .suggestion-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .suggestion-item:hover {
+            background-color: #e0f7fa; /* Light blue on hover */
+        }
+        .categories-container {
+            margin-top: 2rem; /* Space above categories */
+            display: flex; /* Flexbox for layout */
+            justify-content: center; /* Center the profile cards */
+            flex-wrap: wrap; /* Allow wrapping if necessary */
+            padding: 10px 0; /* Padding for spacing */
+        }
+        .professional-card {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 10px; /* Space between cards */
+            padding: 1rem;
+            width: 200px; /* Fixed width for professional cards */
+            text-align: center;
+        }
+        .rating {
+            color: gold; /* Star color */
+        }
+        .hire-button {
+            background-color: #007bb8; /* Sea blue background for Hire button */
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px; /* Space above the button */
+        }
+        .hire-button:hover {
+            background-color: #005f8c; /* Darker sea blue on hover */
+        }
+        footer {
+            text-align: center;
+            padding: 0.5rem;
+            background-color: #007bb8; /* Sea blue footer */
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Search and Hire Professionals</h1>
+</header>
+
+<main>
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search for professionals..." onkeyup="showSuggestions(this.value)">
+        <div id="suggestions" class="suggestions"></div> <!-- Suggestions below the search bar -->
+    </div>
+    
+    <h2>Popular Categories</h2>
+    <div class="categories-container" id="categories-container">
+        <div class="professional-card">
+            <h3>Web Development</h3>
+            <p>John Doe</p>
+            <div class="rating">★★★★☆</div> <!-- Star rating -->
+            <button class="hire-button" onclick="window.location.href='john.html';">Hire</button>
+        </div>
+        <div class="professional-card">
+            <h3>Graphic Design</h3>
+            <p>Jane Smith</p>
+            <div class="rating">★★★★★</div> <!-- Star rating -->
+            <button class="hire-button" onclick="window.location.href='jane.html';">Hire</button>
+        </div>
+        <div class="professional-card">
+            <h3>Digital Marketing</h3>
+            <p>Mike Johnson</p>
+            <div class="rating">★★★★☆</div> <!-- Star rating -->
+            <button class="hire-button" onclick="window.location.href='mike.html';">Hire</button>
+        </div>
+        <div class="professional-card">
+            <h3>Content Writing</h3>
+            <p>Emily Davis</p>
+            <div class="rating">★★★☆☆</div> <!-- Star rating -->
+            <button class="hire-button" onclick="window.location.href='emily.html';">Hire</button>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2024 Professional Hiring Platform. All rights reserved.</p>
+</footer>
+
+<script>
+    const professions = ["Web Development", "Graphic Design", "Digital Marketing", "Content Writing", "SEO Specialist", "Social Media Manager"];
+
+    function showSuggestions(value) {
+        const suggestionsBox = document.getElementById("suggestions");
+        suggestionsBox.innerHTML = ""; // Clear previous suggestions
+        suggestionsBox.style.display = "none"; // Hide suggestions box
+
+        if (value) {
+            const filteredProfessions = professions.filter(profession => profession.toLowerCase().includes(value.toLowerCase()));
+            filteredProfessions.forEach(profession => {
+                const suggestionItem = document.createElement("div");
+                suggestionItem.className = "suggestion-item";
+                suggestionItem.innerText = profession;
+                suggestionItem.onclick = () => {
+                    document.getElementById("search-input").value = profession;
+                    suggestionsBox.innerHTML = ""; // Clear suggestions
+                    suggestionsBox.style.display = "none"; // Hide suggestions box
+                };
+                suggestionsBox.appendChild(suggestionItem);
+            });
+
+            if (filteredProfessions.length > 0) {
+                suggestionsBox.style.display = "block"; // Show suggestions box
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

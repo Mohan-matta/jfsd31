@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('images/registrationPage.webp'); /* Add your background image URL here */
+            background-size: cover; /* Ensures the background image covers the entire page */
+            background-position: center; /* Centers the background image */
+            background-repeat: no-repeat; /* Prevents repeating the image */
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .register-container {
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.9); /* Adds transparency to the container */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90vw; /* Responsive width */
+            max-width: 400px; /* Maximum width for larger screens */
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .register-container h2 {
+            margin-bottom: 0.8rem;
+        }
+        .register-container label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem; /* Reduce label size */
+        }
+        .register-container input, .register-container select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 0.8rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .register-button {
+            background-color: #007bff;
+            border: none;
+            color: white;
+            padding: 8px;
+            width: 100%;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+        .register-button:hover {
+            background-color: #0056b3;
+        }
+        .validation-box {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.8rem; /* Reduce font size */
+        }
+        .validation-box i {
+            margin-right: 6px;
+            visibility: hidden;
+        }
+        .validation-box.valid i {
+            visibility: visible;
+            color: green;
+        }
+        .email-error {
+            font-size: 0.8rem;
+            color: red;
+            visibility: hidden;
+            text-align: left;
+        }
+        .email-error.visible {
+            visibility: visible;
+        }
+        .register-options {
+            margin-top: 0.8rem;
+            text-align: center;
+        }
+        .register-options button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            margin: 5px;
+        }
+        .register-google {
+            background-color: #db4437;
+            color: white;
+        }
+        .register-options button:hover {
+            opacity: 0.8;
+        }
+        .register-options i {
+            margin-right: 6px;
+        }
+        .success-message {
+            font-size: 0.9rem;
+            color: green;
+            margin-top: 0.8rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="register-container">
+    <h2>Register</h2>
+
+    <div class="register-role">
+        <label for="role">Registering as:</label>
+        <select id="role" required>
+            <option value="" disabled selected>Select your role</option>
+            <option value="user">User</option>
+            <option value="professional">Professional</option>
+        </select>
+    </div>
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" placeholder="Enter your name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" placeholder="Enter your email" required>
+    <div id="emailError" class="email-error">
+        Invalid email
+    </div>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" placeholder="Enter your password" required>
+    <div class="validation-box" id="minLength">
+        <i class="fas fa-check-circle"></i> Minimum 6 characters
+    </div>
+    <div class="validation-box" id="specialChar">
+        <i class="fas fa-check-circle"></i> Must contain at least 1 special character
+    </div>
+
+    <button class="register-button" onclick="validateForm(event)">Register</button>
+
+    <div class="success-message" id="successMessage">
+        Registration successful! Redirecting...
+    </div>
+
+    <div class="register-options">
+        <p>You can sign up with:</p>
+        <button class="register-google">
+            <i class="fab fa-google"></i> Register with Google
+        </button>
+    </div>
+</div>
+
+<script>
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const roleSelect = document.getElementById('role');
+    const emailError = document.getElementById('emailError');
+    const minLength = document.getElementById('minLength');
+    const specialChar = document.getElementById('specialChar');
+    const successMessage = document.getElementById('successMessage');
+
+    // Validate email on blur (after input field loses focus)
+    emailInput.addEventListener('blur', function() {
+        const emailValue = emailInput.value;
+        if (emailValue.endsWith('@gmail.com') || emailValue.endsWith('@email.com')) {
+            emailError.classList.remove('visible');
+        } else {
+            emailError.classList.add('visible');
+        }
+    });
+
+    // Validate password as the user types
+    passwordInput.addEventListener('input', function() {
+        const password = passwordInput.value;
+        const minLengthValid = password.length >= 6;
+        const specialCharValid = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+        if (minLengthValid) {
+            minLength.classList.add('valid');
+        } else {
+            minLength.classList.remove('valid');
+        }
+
+        if (specialCharValid) {
+            specialChar.classList.add('valid');
+        } else {
+            specialChar.classList.remove('valid');
+        }
+    });
+
+    function validateForm(event) {
+        event.preventDefault();
+        let isValid = true;
+
+        // Ensure the email is valid
+        const emailValue = emailInput.value;
+        if (!emailValue.endsWith('@gmail.com') && !emailValue.endsWith('@email.com')) {
+            emailError.classList.add('visible');
+            isValid = false;
+        }
+
+        // Ensure password meets all conditions
+        const password = passwordInput.value;
+        const minLengthValid = password.length >= 6;
+        const specialCharValid = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+        if (!minLengthValid || !specialCharValid) {
+            isValid = false;
+        }
+
+        if (isValid) {
+            successMessage.style.display = 'block';
+
+            // Redirect based on selected role after a short delay
+            setTimeout(() => {
+                const selectedRole = roleSelect.value;
+                if (selectedRole === 'user') {
+                    window.location.href = 'user.html';
+                } else if (selectedRole === 'professional') {
+                    window.location.href = 'professional.html';
+                }
+            }, 1500); // 1.5 seconds delay before redirecting
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Login - Professional Hiring Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa; /* Light blue background */
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #007bb8; /* Sea blue header */
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        main {
+            padding: 2rem;
+            text-align: center;
+        }
+        footer {
+            text-align: center;
+            padding: 0.5rem;
+            background-color: #007bb8; /* Sea blue footer */
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            font-size: 12px;
+        }
+        .login-container {
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            text-align: center;
+        }
+        .login-container h2 {
+            margin-bottom: 1rem;
+        }
+        .login-container label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-button {
+            background-color: #007bff; /* Blue login button */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            width: 100%;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .login-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        .register-container {
+            margin-top: 1rem;
+        }
+        .register-container a {
+            color: #007bff; /* Link color */
+            text-decoration: none;
+        }
+        .register-container a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Professional Login</h1>
+</header>
+
+<main>
+    <div class="login-container">
+        <h2>Login</h2>
+        <label for="professional-email">Email</label>
+        <input type="email" id="professional-email" placeholder="Enter your email" required>
+
+        <label for="professional-password">Password</label>
+        <input type="password" id="professional-password" placeholder="Enter your password" required minlength="6">
+
+        <button class="login-button" onclick="validateLogin()">Login</button>
+
+        <div class="register-container">
+            <p>Don't have an account?</p>
+            <p><a href="register.html">Register here</a></p>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2024 Professional Hiring Platform. All rights reserved.</p>
+</footer>
+
+<script>
+    function validateLogin() {
+        const email = document.getElementById("professional-email").value;
+        const password = document.getElementById("professional-password").value;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!email.match(emailPattern)) {
+            alert("Please enter a valid email.");
+            return;
+        }
+
+        if (password.length < 6) {
+            alert("Password must be at least 6 characters long.");
+            return;
+        }
+
+        // Perform login action (e.g., redirect to professional profile management page)
+        alert("Successfully logged in as Professional");
+        window.location.href = "professional_profile.html"; // Redirect to profile management page
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('images/login page.jpg'); /* Add the image URL here */
+            background-size: cover; /* Ensures the image covers the entire background */
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevents horizontal scrolling */
+        }
+        header {
+            background-color: #008CBA; /* Sea blue color */
+            color: white;
+            padding: 0.5rem;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+        }
+        nav ul li {
+            margin: 0 1rem;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        main {
+            padding: 2rem;
+            text-align: center;
+        }
+        footer {
+            text-align: center;
+            padding: 0.5rem;
+            background-color: #008CBA; /* Sea blue color */
+            color: white;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            font-size: 12px;
+        }
+        .login-container {
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            text-align: center;
+        }
+        .login-container h2 {
+            margin-bottom: 1rem;
+        }
+        .login-container label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .login-container select, .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-button {
+            background-color: #007bff; /* Blue color */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            width: 100%;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .login-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        .register-options {
+            margin-top: 1rem;
+            text-align: center;
+        }
+        .register-options button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            margin: 2px;
+        }
+        .register-email {
+            background-color: #007bff;
+            color: white;
+        }
+        .register-google {
+            background-color: #db4437;
+            color: white;
+        }
+        .register-options button:hover {
+            opacity: 0.8;
+        }
+        .register-options i {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Expert Hub</h1>
+    <nav>
+        <ul>
+            <li>
+                <a href="index.html" style="color: white; text-decoration: none; font-size: 16px;">
+                    Home
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="login-container">
+        <h2>Login</h2>
+        <label for="login-options">Select Login</label>
+        <select id="login-options">
+            <option value="">Select Login</option>
+            <option value="admin.html">Admin</option>
+            <option value="professional.html">Professional</option>
+            <option value="user.html">User</option>
+        </select>
+        <button class="login-button" onclick="redirectToLogin()">Login</button>
+        
+        <div class="register-options">
+            <p>Don't have an account?</p>
+            <button class="register-email" onclick="registerWithEmail()">
+                <i class="fas fa-envelope"></i> Register with Email
+            </button>
+            <p>or</p>
+            <button class="register-google" onclick="registerWithGoogle()">
+                <i class="fab fa-google"></i> Register with Google
+            </button>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2024 Expert Hub. All rights reserved.</p>
+</footer>
+
+<script>
+    function redirectToLogin() {
+        const loginOptions = document.getElementById("login-options");
+        const selectedValue = loginOptions.value;
+
+        if (selectedValue) {
+            window.location.href = selectedValue;
+            // Store login status in sessionStorage
+            sessionStorage.setItem("isLoggedIn", "true");
+        } else {
+            alert("Please select a login option.");
+        }
+    }
+
+    function registerWithEmail() {
+        window.location.href = "email.html"; // Redirect to the email registration page
+    }
+
+    function registerWithGoogle() {
+        window.location.href = "https://accounts.google.com/signin/v2/identifier"; // Google login link
+    }
+</script>
+
+</body>
+</html>

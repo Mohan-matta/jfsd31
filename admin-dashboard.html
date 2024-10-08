@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa; /* Light blue background */
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #008cba; /* Light blue header */
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 2px solid #00acc1; /* Border for a cleaner look */
+        }
+        .dashboard-container {
+            margin: 50px auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            border: 2px solid #00acc1; /* Light blue border for container */
+        }
+        .dashboard-container h2 {
+            margin-bottom: 1rem;
+            color: #008cba; /* Light blue heading */
+        }
+        .button {
+            background-color: #008cba; /* Light blue button */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .button:hover {
+            background-color: #006994; /* Darker blue on hover */
+        }
+        .section {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f0f0f0; /* Light gray for sections */
+        }
+        .section h3 {
+            margin-top: 0;
+            color: #006994; /* Darker blue for section headings */
+        }
+        .form-input {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .feedback-list {
+            margin-top: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #e0f7fa; /* Light blue background for feedback list */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Admin Dashboard</h1>
+</header>
+
+<div class="dashboard-container">
+    <h2>Manage Platform</h2>
+
+    <div class="section">
+        <h3>Platform Settings</h3>
+        <input type="text" class="form-input" placeholder="Update site name" id="site-name">
+        <button class="button" onclick="updateSiteName()">Update Site Name</button>
+    </div>
+
+    <div class="section">
+        <h3>User Roles Management</h3>
+        <button class="button" onclick="addUserRole()">Add User Role</button>
+        <button class="button" onclick="editUserRole()">Edit User Role</button>
+        <button class="button" onclick="deleteUserRole()">Delete User Role</button>
+    </div>
+
+    <div class="section">
+        <h3>Service Listings Management</h3>
+        <input type="text" class="form-input" placeholder="Enter service name" id="service-name">
+        <button class="button" onclick="addService()">Add Service</button>
+        <button class="button" onclick="editService()">Edit Service</button>
+        <button class="button" onclick="deleteService()">Delete Service</button>
+    </div>
+
+    <div class="section">
+        <h3>User Feedback for Professionals</h3>
+        <select class="form-input" id="professional-select"></select>
+        <button class="button" onclick="retrieveFeedback()">Retrieve Feedback</button>
+        <div class="feedback-list" id="feedback-list"></div>
+    </div>
+</div>
+
+<script>
+    // Sample professional list (can be dynamically generated in the future)
+    const professionals = [
+        "Professional A",
+        "Professional B",
+        "Professional C",
+        "Professional D"
+    ];
+
+    // Populate the professional dropdown
+    const professionalSelect = document.getElementById("professional-select");
+    professionals.forEach(professional => {
+        const option = document.createElement("option");
+        option.value = professional;
+        option.textContent = professional;
+        professionalSelect.appendChild(option);
+    });
+
+    function updateSiteName() {
+        const siteName = document.getElementById("site-name").value;
+        alert(`Site name updated to: ${siteName}`);
+        // Logic to update the site name in the backend goes here
+    }
+
+    function addUserRole() {
+        alert("Redirecting to Add User Role...");
+        // Redirect to add user role page
+    }
+
+    function editUserRole() {
+        alert("Redirecting to Edit User Role...");
+        // Redirect to edit user role page
+    }
+
+    function deleteUserRole() {
+        alert("Redirecting to Delete User Role...");
+        // Redirect to delete user role page
+    }
+
+    function addService() {
+        const serviceName = document.getElementById("service-name").value;
+        alert(`Service '${serviceName}' added successfully!`);
+        // Logic to add service in the backend goes here
+    }
+
+    function editService() {
+        alert("Redirecting to Edit Service...");
+        // Redirect to edit service page
+    }
+
+    function deleteService() {
+        alert("Redirecting to Delete Service...");
+        // Redirect to delete service page
+    }
+
+    function retrieveFeedback() {
+        const professionalName = document.getElementById("professional-select").value;
+        const feedbackList = document.getElementById("feedback-list");
+
+        // Sample feedback data
+        const feedbacks = [
+            { user: "User1", professional: "Professional A", comment: "Great service!", rating: 5 },
+            { user: "User2", professional: "Professional B", comment: "Very professional.", rating: 4 },
+            { user: "User1", professional: "Professional A", comment: "Could be better.", rating: 3 },
+            { user: "User3", professional: "Professional A", comment: "Excellent work!", rating: 5 }
+        ];
+
+        feedbackList.innerHTML = ""; // Clear existing feedback
+
+        const filteredFeedbacks = feedbacks.filter(feedback => 
+            feedback.professional === professionalName
+        );
+
+        if (filteredFeedbacks.length === 0) {
+            feedbackList.innerHTML = "No feedback found for this professional.";
+            return;
+        }
+
+        filteredFeedbacks.forEach(feedback => {
+            const feedbackItem = document.createElement("div");
+            feedbackItem.textContent = `${feedback.user}: "${feedback.comment}" (Rating: ${feedback.rating})`;
+            feedbackList.appendChild(feedbackItem);
+        });
+    }
+</script>
+
+</body>
+</html>
